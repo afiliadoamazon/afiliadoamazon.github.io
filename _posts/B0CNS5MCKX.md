@@ -1,0 +1,16 @@
+---
+layout: product
+title: "Kit Testo Pote 120 C\u00e1psulas + Testo Dilated Pote 120 Capsulas"
+subtitle: "Vitaminas - Body Nutry"
+date: 2025-02-24
+image: "https://m.media-amazon.com/images/I/71uUXp4Zb6L.__AC_SX300_SY300_QL70_ML2_.jpg"
+price: "R$ 66,95"
+coupon: "10%"
+rating: 4.5
+reviews_count: 150
+amazon_link: "https://www.amazon.com.br/dp/B0CNS5MCKX?tag=clubedozapama-20"
+category: vitaminas
+tags:
+ - Vitaminas
+ - Body Nutry
+---

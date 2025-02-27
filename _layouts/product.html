@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<style>
+  {% raw %}
+.product-post {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.product-image img {
+  width: 100%;
+  height: auto;
+}
+
+.product-details {
+  margin: 20px 0;
+}
+
+.product-details p {
+  margin: 5px 0;
+}
+
+.amazon-button {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.amazon-button .btn {
+  background-color: #ff9900;
+  color: white;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+.amazon-button .btn:hover {
+  background-color: #e68a00;
+}
+{% endraw %}
+
+</style>
+<html lang="{{ site.language }}" class="no-js">
+    {% include head.html %}
+    <body class="has-push-menu">
+        {% include minutes-to-read.html %}
+        {% include svg-icons.html %}
+        {% include header.html %}
+
+        <section class="post {% if site.two_columns_layout %}two-columns{% else %}one-column{% endif %}">
+          <article class="product-post">
+            <div class="product-container">
+              <div class="product-image-container">
+                {% if page.image %}
+                  <img src="{{ page.image }}" alt="{{ page.title }}" class="product-image">
+                {% endif %}
+              </div>
+              
+              <div class="product-info">
+                <header>
+                  <h1 class="product-title">{{ page.title }}</h1>
+                  {% if page.subtitle %}
+                    <p class="product-subtitle">{{ page.subtitle }}</p>
+                  {% endif %}
+                  {% if page.date %}
+                    <p class="product-date">Publicado em {{ page.date | date: "%d de %B de %Y" }}</p>
+                  {% endif %}
+                </header>
+          
+                <div class="product-meta">
+                  {% if page.rating %}
+                    <p class="product-rating">⭐ {{ page.rating }} / 5</p>
+                  {% endif %}
+                  {% if page.reviews_count %}
+                    <p class="product-reviews">{{ page.reviews_count }} avaliações</p>
+                  {% endif %}
+                  {% if page.price %}
+                    <p class="product-price">Preço: <strong>{{ page.price }}</strong></p>
+                  {% endif %}
+                  {% if page.coupon %}
+                    <p class="product-coupon">Cupom disponível: <strong>{{ page.coupon }}</strong></p>
+                  {% endif %}
+                </div>
+          
+                {% if page.amazon_link %}
+                  <div class="product-cta">
+                    <html lang="pt">
+                    <head>
+                        <meta charset="UTF-8">
+                        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                        <title>Botão Amazon</title>
+                        <style>
+                            .amazon-button {
+                                display: inline-flex;
+                                align-items: center;
+                                background-color: #FF9900;
+                                color: white;
+                                font-size: 16px;
+                                font-weight: bold;
+                                padding: 10px 20px;
+                                text-decoration: none;
+                                border-radius: 5px;
+                                border: none;
+                                cursor: pointer;
+                                transition: background 0.3s;
+                            }
+
+                            .amazon-button img {
+                                width: 24px;
+                                height: 24px;
+                                margin-right: 10px;
+                            }
+
+                            .amazon-button:hover {
+                                background-color: #E68A00;
+                            }
+                        </style>
+                    </head>
+                    <body>
+
+                        <a href="{{ page.amazon_link }}" target="_blank" class="amazon-button">
+                            <img src="https://icons.iconarchive.com/icons/bokehlicia/captiva/256/web-amazon-icon.png" alt="Amazon">
+                            Compre na Amazon
+                        </a>
+                        <h1>Você será redirecionado em <span id="timer">5</span> segundos...</h1>
+                    </body>
+                    <!-- <a href="" class="amazon-button" target="_blank" rel="nofollow">🛒 Ver na Amazon</a> -->
+                  </div>
+                  
+                {% endif %}
+              </div>
+            </div>
+          
+            <div class="product-description">
+              {{ content }}
+            </div>
+          </article>
+</section>
+ <!-- Add time bar only for pages without pagination -->
+ {% if paginator.activated == nil and site.show_time_bar == true %}
+ {% include time-bar.html %}
+ {% include recommendation.html %}
+{% endif %}
+
+<!-- Show modal if the post is the last one -->
+{% if paginator.is_last and site.show_modal_on_finish_post %}
+ {% include modal.html title="You made it!" subtitle="Why don't you try another?" %}
+{% endif %}
+
+<!-- Show modal before user leaves the page -->
+{% if site.show_modal_on_exit %}
+ {% include modal.html title="Don't go yet!" subtitle="You may also like..." closed=true showOnExit=true %}
+{% endif %}
+
+{% include subscription.html %}
+{% include share.html %}
+{% include author.html %}
+{% include comments.html %}
+{% include footer.html %}
+
+{% assign author = site.authors | where: "name", post.author | first %}
+
+{% assign author_urls = '' %}
+{% if author.github_username %}
+ {% assign author_urls = author_urls | append: '"https://github.com/' | append: author.github_username | append: '",' %}
+{% endif %}
+{% if author.facebook_username %}
+ {% assign author_urls = author_urls | append: '"https://www.facebook.com/' | append: author.facebook_username | append: '",' %}
+{% endif %}
+{% if author.twitter_username %}
+ {% assign author_urls = author_urls | append: '"https://twitter.com/' | append: author.twitter_username | append: '",' %}
+{% endif %}
+{% if author.medium_username %}
+ {% assign author_urls = author_urls | append: '"https://medium.com/@' | append: author.medium_username | append: '",' %}
+{% endif %}
+{% if author.instagram_username %}
+ {% assign author_urls = author_urls | append: '"https://www.instagram.com/' | append: author.instagram_username | append: '",' %}
+{% endif %}
+{% if author.linkedin_username %}
+ {% assign author_urls = author_urls | append: '"https://www.linkedin.com/in/' | append: author.linkedin_username | append: '",' %}
+{% endif %}
+{% if page.math %}
+<script>
+ MathJax = {
+     tex: {
+     inlineMath: [['$', '$'], ['\\(', '\\)']]
+     }
+ };
+</script>
+<script type="text/javascript" id="MathJax-script" async
+ src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+{% endif %}
+<script>
+  let tempoRestante = 5; // Tempo em segundos
+
+  function atualizarTimer() {
+      document.getElementById("timer").innerText = tempoRestante;
+      if (tempoRestante === 0) {
+          window.location.href = "{{ page.amazon_link }}"; // Altere para a URL desejada
+      } else {
+          tempoRestante--;
+          setTimeout(atualizarTimer, 1000);
+      }
+  }
+
+  window.onload = function() {
+      atualizarTimer();
+  };
+</script>
+<script type="application/ld+json">
+{
+ "@context": "http://schema.org",
+ "@type": "BlogPosting",
+ "name": "{{ page.title }}",
+ "headline": "{{ page.subtitle }}",
+ "description": "{{ page.description }}",
+ "image": "{{ page.image }}",
+ "url": "{{ page.url | prepend: site.baseurl | prepend: site.url }}",
+ "articleBody": "{{ content | strip_html | xml_escape | textilize }}",
+ "wordcount": "{{ content | number_of_words }}",
+ "inLanguage": "{{ site.language }}",
+ "dateCreated": "{{ page.date | date: '%Y-%m-%d/' }}",
+ "datePublished": "{{ page.date | date: '%Y-%m-%d/' }}",
+ "dateModified": "{{ page.date | date: '%Y-%m-%d/' }}",
+ "author": {
+     "@type": "Person",
+     "name": "{{ author.display_name }}",
+     {% if author.photo %}
+     "image": "{{ author.photo }}",
+     {% else %}
+     "image": {{ "/assets/img/user.jpg" | prepend: site.baseurl | prepend: site.url }},
+     {% endif %}
+     "jobTitle": "{{ author.position }}",
+     "url": "{{ author.url | prepend: site.baseurl | prepend: site.url }}",
+     "sameAs": [
+         {{ author_urls | split: "," | join: "," }}
+     ]
+ },
+ "publisher": {
+     "@type": "Organization",
+     "name": "{{ site.name }}",
+     "url": "{{ site.url }}{{site.baseurl}}/",
+     "logo": {
+         "@type": "ImageObject",
+         "url": "{{ site.url }}{{site.baseurl}}/assets/img/blog-image.png",
+         "width": "600",
+         "height": "315"
+     }
+ },
+ "mainEntityOfPage": "True",
+ "genre": "{{ page.category }}",
+ "articleSection": "{{ page.category }}",
+ "keywords": [{{ page.tags | join: '","' | append: '"' | prepend: '"' }}]
+}
+</script>
+</body>
+</html>
+
