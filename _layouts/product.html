@@ -74,7 +74,7 @@
                     <p class="product-reviews">{{ page.reviews_count }} avaliações</p>
                   {% endif %}
                   {% if page.price %}
-                    <p class="product-price">Preço: <strong>{{ page.price }}</strong></p>
+                    <p class="product-price">Preço: <strong>R$ {{ page.price }}</strong></p>
                   {% endif %}
                   {% if page.coupon %}
                     <p class="product-coupon">Cupom disponível: <strong>{{ page.coupon }}</strong></p>
@@ -121,7 +121,6 @@
                             <img src="https://icons.iconarchive.com/icons/bokehlicia/captiva/256/web-amazon-icon.png" alt="Amazon">
                             Compre na Amazon
                         </a>
-                        <h1>Você será redirecionado em <span id="timer">5</span> segundos...</h1>
                     </body>
                     <!-- <a href="" class="amazon-button" target="_blank" rel="nofollow">🛒 Ver na Amazon</a> -->
                   </div>
@@ -133,6 +132,7 @@
             <div class="product-description">
               {{ content }}
             </div>
+            <h3 style="color:white;">Você será redirecionado em <span id="timer">5</span> segundos...</h3>
           </article>
 </section>
  <!-- Add time bar only for pages without pagination -->
@@ -191,7 +191,7 @@
 </script>
 {% endif %}
 <script>
-  let tempoRestante = 5; // Tempo em segundos
+  let tempoRestante = 30; // Tempo em segundos
 
   function atualizarTimer() {
       document.getElementById("timer").innerText = tempoRestante;

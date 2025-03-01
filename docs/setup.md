@@ -73,7 +73,7 @@ translations:
     share: "Share"
     comments: "Comments"
   button:
-    read_now: "Read Now"
+    read_now: "Abrir Produto"
     share_on_twitter: "Share on Twitter"
     share_on_facebook: "Share on Facebook"
   pagination:
